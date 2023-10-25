@@ -3,7 +3,12 @@ package model;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
-
+/**
+ * @author Yurii Debeliak
+ *
+ *
+ *
+ * **/
 public class Ticket {
     private int id;
     private static int amount = 1;
