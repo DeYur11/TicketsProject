@@ -2,6 +2,7 @@ package model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 /**
  * @author Yurii Debeliak
@@ -9,7 +10,7 @@ import java.time.LocalDate;
  *
  *
  * **/
-public class Ticket {
+public class Ticket implements Serializable {
     private int id;
     private static int amount = 1;
     private final String surname;
@@ -21,7 +22,7 @@ public class Ticket {
         this.surname = "Default";
         this.name = "Default";
         this.phoneNumber = "+380 00 000 00 00";
-        this.type = TicketType.standart;
+        this.type = TicketType.standard;
         this.date = LocalDate.of(2005, 5, 11);
 
         this.id = amount;
@@ -85,8 +86,8 @@ public class Ticket {
                 "surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", number='" + phoneNumber + '\'' +
-                ", type=" + type +
-                ", date=" + date +
+                ", type=" + type.toString() +
+                ", date=" + date.toString() +
                 '}';
     }
     
