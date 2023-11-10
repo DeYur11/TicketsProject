@@ -14,4 +14,6 @@ module com.example.kursfx {
     exports com.example.kursfx;
     exports model;
     opens model to javafx.fxml;
+    exports utils;
+    opens utils to javafx.fxml;
 }

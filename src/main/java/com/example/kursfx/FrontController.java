@@ -1,6 +1,9 @@
 package com.example.kursfx;
 
 import controller.Controller;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -20,19 +25,18 @@ import model.TicketType;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class FrontController implements Initializable {
+    private static final double animationTime = 0.3;
     Controller controller;
     @FXML
-    private Button addButton;
+    private BorderPane formPanel;
     @FXML
-    private VBox form;
+    private Button addButton;
     @FXML
     private TableColumn<Ticket, LocalDate> dateColumn;
     @FXML
@@ -58,6 +62,14 @@ public class FrontController implements Initializable {
     @FXML
     private ComboBox<TicketType> typeTicketComboBox;
     private final FileChooser fileChooser = new FileChooser();
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private AnchorPane scene;
+
+    private boolean isHiden;
+
+    private double tableWidth;
 
     @FXML
     void onAddButtonPressed(ActionEvent event) {
@@ -77,6 +89,8 @@ public class FrontController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        isHiden = false;
+        ticketsTable.setFocusTraversable(false);
         FileChooser.ExtensionFilter ext = new FileChooser.ExtensionFilter("TICKET", "*.tic");
         fileChooser.getExtensionFilters().add(ext);
 
@@ -90,28 +104,61 @@ public class FrontController implements Initializable {
         typeTicketComboBox.getItems().setAll(TicketType.values());
 
         this.controller = new Controller();
-
         this.ticketsTable.setItems((ObservableList<Ticket>) controller.getData());
     }
     @FXML
     public void hideForm(){
-        TranslateTransition slideIn = new TranslateTransition(Duration.seconds(0.5), form);
-        slideIn.setToX(0);
+        if(!isHiden){
+            tableWidth = ticketsTable.getWidth();
+            Timeline timeline = new Timeline();
+            AnchorPane.setRightAnchor(ticketsTable, null);
 
+            KeyFrame key1 = new KeyFrame(Duration.ZERO,
+                    new KeyValue(formPanel.translateXProperty(), 0),
+                    new KeyValue(ticketsTable.prefWidthProperty(), tableWidth),
+                    new KeyValue(ticketsTable.translateXProperty(), 0));
 
-        TranslateTransition slideOut = new TranslateTransition(Duration.seconds(0.5), form);
-        slideOut.setToX(-form.getWidth());
-        if(form.getTranslateX()==0){
+            KeyFrame key2 = new KeyFrame(Duration.seconds(animationTime),
+                    new KeyValue(formPanel.translateXProperty(), -formPanel.getPrefWidth()-1),
+                    new KeyValue(ticketsTable.translateXProperty(), -180),
+                    new KeyValue(ticketsTable.prefWidthProperty(), tableWidth+180));
 
-            slideOut.setOnFinished(actionEvent -> form.setTranslateX(-form.getWidth()));
-            slideOut.play();
-
+            timeline.getKeyFrames().addAll(key1, key2);
+            //timeline.setAutoReverse(true);
+            //timeline.setCycleCount(2);
+            ArrayList<Integer> some = new ArrayList<Integer>();
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    AnchorPane.setRightAnchor(ticketsTable, -180.0);
+                }
+            });
+            timeline.play();
         }else{
-            slideIn.setOnFinished(actionEvent -> form.setTranslateX(0));
-            slideIn.play();
+            tableWidth = ticketsTable.getWidth()-180;
+            Timeline timeline = new Timeline();
+            AnchorPane.setRightAnchor(ticketsTable, null);
+            KeyFrame key1 = new KeyFrame(Duration.seconds(animationTime),
+                    new KeyValue(formPanel.translateXProperty(), 0),
+                    new KeyValue(ticketsTable.prefWidthProperty(), tableWidth),
+                    new KeyValue(ticketsTable.translateXProperty(), 0));
+            KeyFrame key2 = new KeyFrame(Duration.ZERO,
+                    new KeyValue(formPanel.translateXProperty(), -formPanel.getPrefWidth()-1),
+                    new KeyValue(ticketsTable.translateXProperty(), -180),
+                    new KeyValue(ticketsTable.prefWidthProperty(), tableWidth+180));
+
+            timeline.getKeyFrames().addAll(key2, key1);
+            //timeline.setAutoReverse(true);
+            //timeline.setCycleCount(2);
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    AnchorPane.setRightAnchor(ticketsTable, 0.0);
+                }
+            });
+            timeline.play();
         }
-       // form.setManaged(!form.isManaged());
-       // form.setVisible(!form.isVisible());
+        isHiden = !isHiden;
     }
     @FXML
     public void deleteRow(ActionEvent e){
@@ -133,7 +180,6 @@ public class FrontController implements Initializable {
             alert.setContentText("Помилка при збереженні даних у файл. Спробуйте ще раз!");
             alert.show();
         }
-
     }
     @FXML
     public void loadFromFile(){
@@ -151,7 +197,6 @@ public class FrontController implements Initializable {
             loadData();
         }
     }
-
     private void loadData(){
         File file = fileChooser.showOpenDialog(new Stage()).getAbsoluteFile();
         try {
@@ -163,5 +208,23 @@ public class FrontController implements Initializable {
             alert.show();
         }
     }
+    @FXML
+    private void onCloseClicked(){
+        javafx.application.Platform.exit();
+    }
+    @FXML
+    private void onFullscreenClicked(){
+        Stage stage = (Stage) formPanel.getScene().getWindow();
+        if(stage.isFullScreen()){
+            stage.setFullScreen(false);
+        }else{
+            stage.setFullScreen(true);
+        }
+    }
 
+    @FXML
+    private void onHideWindowClicked(){
+        Stage stage = (Stage) formPanel.getScene().getWindow();
+        stage.setIconified(true);
+    }
 }
