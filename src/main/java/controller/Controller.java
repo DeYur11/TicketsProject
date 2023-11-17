@@ -38,5 +38,11 @@ public class Controller {
     public void loadFromFile(File file) throws IOException {
         database.loadFromFile(file);
     }
+    public void clear(){
+        database.clear();
+    }
 
+    public void mergeSort(){
+        database.customSort();
+    }
 }

@@ -27,30 +27,17 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
 
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-//        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                xOffset = event.getSceneX();
-//                yOffset = event.getSceneY();
-//            }
-//        });
-//        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                stage.setX(event.getScreenX() - xOffset);
-//                stage.setY(event.getScreenY() - yOffset);
-//            }
-//        });
-
         Scene scene = new Scene(root);
         stage.setTitle("Менеджер білетів");
         this.scene = scene;
 
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        ResizeHelper.addResizeListener(stage);
+        ResizeHelper.addResizeListener(stage, 599, 385, stage.getMaxWidth(), stage.getMaxHeight());
         stage.show();
+        stage.setFullScreenExitHint("");
     }
+
 
     public Scene getScene() {
         return scene;

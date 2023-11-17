@@ -9,7 +9,6 @@ module com.example.kursfx {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires org.jetbrains.annotations;
-
     opens com.example.kursfx to javafx.fxml;
     exports com.example.kursfx;
     exports model;

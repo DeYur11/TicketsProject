@@ -1,86 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.input.KeyCodeCombination?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="scene" prefHeight="608.0" prefWidth="862.0" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursfx.FrontController">
+<AnchorPane fx:id="scene" prefHeight="385.0" prefWidth="599.0" stylesheets="@nord-light.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursfx.FrontController">
    <children>
-      <AnchorPane prefHeight="35.0" prefWidth="800.0" styleClass="top-panel" stylesheets="@settings.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="File">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Load" />
-                      <MenuItem mnemonicParsing="false" text="Save">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                    </items>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="View">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#hideForm" text="Show form" />
-                     </items>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="Find">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="By number" />
-                      <MenuItem mnemonicParsing="false" text="By surname" />
-                    </items>
-                  </MenuButton>
-                  <SplitMenuButton mnemonicParsing="false" text="SplitMenuButton">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </SplitMenuButton>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Button">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Button">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-      <TableView fx:id="ticketsTable" prefHeight="407.0" prefWidth="712.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+      <AnchorPane minHeight="36.0" minWidth="599.0" prefHeight="36.0" prefWidth="698.0" styleClass="top-panel" stylesheets="@settings.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TableView fx:id="ticketsTable" prefHeight="415.0" prefWidth="491.0" stylesheets="@dracula.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
           <placeholder>
               <Label text="Таблиця порожня" />
           </placeholder>
         <columns>
-          <TableColumn fx:id="idColumn" editable="false" maxWidth="47.20001298189163" minWidth="20.800019085407257" prefWidth="36.00000077486038" text="№" />
-          <TableColumn fx:id="surnameColumn" editable="false" prefWidth="199.19997787475586" text="Прізвище" />
-            <TableColumn fx:id="nameColumn" prefWidth="64.00000762939453" text="Ім'я" />
-            <TableColumn fx:id="numberColumn" prefWidth="102.4000244140625" text="Телефон" />
-            <TableColumn fx:id="typeColumn" minWidth="1.5999755859375" prefWidth="89.59994506835938" text="Тип білету" />
-            <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="85.60003662109375" text="Строк дії" />
+          <TableColumn fx:id="idColumn" editable="false" maxWidth="47.20001298189163" minWidth="34.39996337890625" prefWidth="34.39996337890625" text="№" />
+          <TableColumn fx:id="surnameColumn" editable="false" minWidth="78.40003967285156" prefWidth="84.00007629394531" text="Прізвище" />
+            <TableColumn fx:id="nameColumn" minWidth="44.800048828125" prefWidth="44.800048828125" text="Ім'я" />
+            <TableColumn fx:id="numberColumn" minWidth="81.5999755859375" prefWidth="81.5999755859375" text="Телефон" />
+            <TableColumn fx:id="typeColumn" minWidth="84.79998779296875" prefWidth="84.79998779296875" text="Тип білету" />
+            <TableColumn fx:id="dateColumn" minWidth="85.60003662109375" prefWidth="85.60003662109375" text="Строк дії" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -117,14 +55,54 @@
             </VBox>
          </center>
       </BorderPane>
-      <HBox alignment="CENTER_RIGHT" layoutX="560.0" prefHeight="35.0" prefWidth="240.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="560.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onHideWindowClicked" prefHeight="30.0" prefWidth="30.0" text="_" />
-            <Button mnemonicParsing="false" onAction="#onFullscreenClicked" prefHeight="26.0" prefWidth="30.0" />
-            <Button fx:id="close" mnemonicParsing="false" onAction="#onCloseClicked" prefHeight="30.0" prefWidth="30.0" styleClass="closebutton" text="X">
+            <Button mnemonicParsing="false" onAction="#onHideWindowClicked" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 0;" text="_" />
+            <Button mnemonicParsing="false" onAction="#onFullscreenClicked" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 0;" text="[]" />
+            <Button fx:id="close" mnemonicParsing="false" onAction="#onCloseClicked" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 0;" styleClass="closebutton" text="X">
                <HBox.margin>
-                  <Insets right="5.0" />
+                  <Insets />
                </HBox.margin></Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="500.0" prefHeight="36.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" style="-fx-background-radius: 0;" text="Файл">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#loadFromFile" text="Відкрити" />
+                <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Зберегти">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              </items>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefWidth="100.0" style="-fx-background-radius: 0;" text="Вигляд">
+               <items>
+                  <RadioMenuItem fx:id="formMenu" mnemonicParsing="false" onAction="#hideForm" text="Форма" />
+                  <MenuItem mnemonicParsing="false" onAction="#clearTable" text="Очистити таблицю" />
+               </items>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefWidth="100.0" style="-fx-background-radius: 0;" text="Знайти">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onSameName" text="Однойменні" />
+                <MenuItem mnemonicParsing="false" onAction="#onFindByPhone" text="За телефоном" />
+                <MenuItem mnemonicParsing="false" onAction="#onFindBySurname" text="За прізвищем" />
+                  <MenuItem mnemonicParsing="false" onAction="#findMostFreq" text="Найпопулярніший" />
+              </items>
+            </MenuButton>
+            <Button mnemonicParsing="false" onAction="#mergeSortTickets" prefWidth="100.0" style="-fx-background-radius: 0;" text="Сортувати" />
+            <Button mnemonicParsing="false" onAction="#resetClicked" prefHeight="26.0" prefWidth="100.0" style="-fx-background-radius: 0;" text="Скинути">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
    </children>

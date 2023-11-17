@@ -11,7 +11,7 @@ public class MergeSort<T> {
 
     private final Comparator<T> comparator;
 
-    public MergeSort(Comparator<T> comparator) {
+    public MergeSort(Comparator<T> comparator) { // Setting custom comparator
         this.comparator = comparator;
     }
 

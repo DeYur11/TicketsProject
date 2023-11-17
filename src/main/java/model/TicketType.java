@@ -2,5 +2,14 @@ package model;
 
 public enum TicketType {
     standard,
-    VIP
+    VIP;
+
+    @Override
+    public String toString() {
+        if(this.equals(TicketType.standard)){
+            return "Стандартний";
+        }else{
+            return "VIP";
+        }
+    }
 }

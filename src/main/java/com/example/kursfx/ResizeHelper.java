@@ -56,7 +56,6 @@ public class ResizeHelper {
             ObservableList<Node> children = parent.getChildrenUnmodifiable();
             for (Node child : children) {
                 if (child instanceof ScrollBar || child instanceof MenuButton) {
-                    System.out.println("Menu");
                     isScrollbar = true;
                 } else {
                     isScrollbar = false;
